@@ -1,11 +1,10 @@
 class AnimeModel {
-
   final String id;
   final AnimeTitle title;
   final String type;
   final List<String> genres;
 
-  AnimeModel({
+  const AnimeModel({
     required this.id,
     required this.title,
     required this.type,
@@ -18,7 +17,7 @@ class AnimeTitle {
   final String english;
   final String native;
 
-  AnimeTitle({
+  const AnimeTitle({
     required this.romaji,
     required this.english,
     required this.native,
