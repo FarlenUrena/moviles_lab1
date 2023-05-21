@@ -1,0 +1,19 @@
+name: anime_service
+description: My new anime service package
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ">=2.19.0 <3.0.0"
+  flutter: 3.7.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+  graphql_flutter: ^5.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  mocktail: ^0.3.0
+  very_good_analysis: ^4.0.0
