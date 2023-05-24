@@ -11,6 +11,7 @@ class Home extends StatelessWidget {
     final genres = context
         .select<AppContextBloc, List<String>>((values) => values.state.genres);
     print(genres.length);
+
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(
@@ -25,7 +26,6 @@ class Home extends StatelessWidget {
             child: TextButton(
                 onPressed: () {
                   // Button pressed callback
-                  print('Button Pressed!');
                   Navigator.pushNamed(context, '/animes');
                 },
                 child: const Text('Change page',
@@ -51,13 +51,24 @@ class Home extends StatelessWidget {
                 children: [
                   // Expanded(
                   // child:
-                  Text(
-                    genre,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 30,
+                  TextButton(
+                    onPressed: () {
+                      Navigator.pushNamed(
+                        context,
+                        '/animes',
+                        arguments: {
+                          'genre': genre
+                        }, // Pasar la variable genre como argumento
+                      );
+                    },
+                    child: Text(
+                      genre,
+                      style: const TextStyle(
+                        color: Colors.black,
+                        fontSize: 30,
+                      ),
                     ),
-                  ),
+                  )
                 ],
               ),
             );

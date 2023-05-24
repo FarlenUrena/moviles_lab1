@@ -1,10 +1,11 @@
 import 'package:anime_repository/anime_repository.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviles_lab1/app_context/app_context.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
   AppContextBloc() : super(const AppContextState()) {
     on<GetGenres>(_handleGetGenres);
+    on<GetAnimes>(_handleGetAnimes);
   }
 
   Future<void> _handleGetGenres(
@@ -16,6 +17,21 @@ class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
 
       emit(state.copyWith(
         genres: fetchedGenres,
+      ));
+    } catch (e) {
+      Exception();
+    }
+  }
+
+  Future<void> _handleGetAnimes(
+    GetAnimes event,
+    Emitter<AppContextState> emit,
+  ) async {
+    try {
+      final fetchedAnimes = await animeAPI.getAnimes();
+
+      emit(state.copyWith(
+        animes: fetchedAnimes,
       ));
     } catch (e) {
       Exception();

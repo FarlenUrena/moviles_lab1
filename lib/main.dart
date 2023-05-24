@@ -17,19 +17,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return RepositoryProvider(
       create: (context) => AnimeRepository(),
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: BlocProvider(
-          create: (context) => AppContextBloc(),
-          child: BlocBuilder<AppContextBloc, AppContextState>(
+      child: BlocProvider(
+        create: (context) => AppContextBloc(),
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+            useMaterial3: true,
+          ),
+          home: BlocBuilder<AppContextBloc, AppContextState>(
             builder: (context, state) {
               if (state.genres.isEmpty) {
                 context.read<AppContextBloc>().add(GetGenres());
-
+                context.read<AppContextBloc>().add(GetAnimes());
                 return const Text('Loading...',
                     style: TextStyle(
                       color: Colors.black,
@@ -41,10 +41,10 @@ class MyApp extends StatelessWidget {
               // }
             },
           ),
+          routes: {
+            '/animes': (context) => const Animes(),
+          },
         ),
-        routes: {
-          '/animes': (context) => const Animes(),
-        },
       ),
     );
   }
