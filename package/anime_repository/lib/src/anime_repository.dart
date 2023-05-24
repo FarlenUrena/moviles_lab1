@@ -14,17 +14,8 @@ class AnimeRepository {
   Future<List<AnimeModel>> getAnimes() async {
     final List<AnimeModel> animes = [];
     try {
-      print('api fetching...');
-
-      print('ssssssssssssssssssssssss: ');
-      print(await _animeService.getAnimeList());
       final animesFetched = await _animeService.getAnimeList();
       animesFetched.forEach((anime) {
-        print('ID: ${anime.id}');
-        print('Title: ${anime.title.english}');
-        print('Type: ${anime.type}');
-        print('Genres: ${anime.genres}');
-        print('+++++++++++++++++++++++++++++++++++++++++++');
         animes.add(
           AnimeModel(
             id: anime.id,
@@ -36,16 +27,8 @@ class AnimeRepository {
           ),
         );
       });
-      print('here');
-
-      print('api fetch');
-      print('here 2');
-
-      print(animes);
-      print("Repo" + animes[0].title.english);
       return animes;
     } catch (e) {
-      print(e);
       throw e;
     }
   }

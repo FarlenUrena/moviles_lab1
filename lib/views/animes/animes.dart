@@ -18,19 +18,10 @@ class Animes extends StatelessWidget {
 
         final genreSelected = arguments['genre'];
         final animes = state.animes;
-        print('eeeeeeeeeeeeeeoooooooooooooooo: $animes');
 
         List<AnimeModel> animesFiltered = animes
             .where((anime) => anime.genres.contains(genreSelected))
             .toList();
-
-        animesFiltered.forEach((anime) {
-          print('ID: ${anime.id}');
-          print('Title: ${anime.title.english}');
-          print('Type: ${anime.type}');
-          print('Genres: ${anime.genres}');
-          print('------------------------');
-        });
 
         return Scaffold(
           body: SingleChildScrollView(
@@ -41,7 +32,7 @@ class Animes extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       '$genreSelected Genre Animes',
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 35,
                         fontWeight: FontWeight.bold,
                       ),

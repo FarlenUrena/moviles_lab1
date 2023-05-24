@@ -13,17 +13,7 @@ class Home extends StatelessWidget {
         .select<AppContextBloc, List<String>>((values) => values.state.genres);
     final animes = context.select<AppContextBloc, List<AnimeModel>>(
         (values) => values.state.animes);
-    print("genres");
-    print(genres);
-    print("animes");
-    animes.forEach((anime) {
-      print('ID: ${anime.id}');
-      print('Title: ${anime.title.english}');
-      print('Type: ${anime.type}');
-      print('Genres: ${anime.genres}');
-      print('------------------------');
-    });
-    print(animes);
+
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(

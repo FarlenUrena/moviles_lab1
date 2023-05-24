@@ -41,16 +41,12 @@ class AnimeService {
 
     final QueryResult result = await _client.query(options);
 
-    print('AAAAAAAAAAAAAAAAAA: ');
-    print(result.data?["Page"]["media"]);
-
     if (result.hasException) {
       throw Exception('Failed to fetch anime list: ${result.exception}');
     }
 
     final List<dynamic> animeDataList =
         result.data?['Page']['media'] as List<dynamic>? ?? [];
-    print('bien aquí');
     final animeList = animeDataList.map((animeData) {
       final titleData = animeData['title'] as Map<String, dynamic>?;
       final englishTitle = titleData?['english'] as String?;
@@ -69,16 +65,6 @@ class AnimeService {
             [], // Provide an empty list as a fallback value for genres
       );
     }).toList();
-
-    print('Anime List:');
-    print(animeList);
-    animeList.forEach((anime) {
-      print('ID: ${anime.id}');
-      print('Title: ${anime.title.english}');
-      print('Type: ${anime.type}');
-      print('Genres: ${anime.genres}');
-      print('------------------------');
-    });
     return animeList;
   }
 

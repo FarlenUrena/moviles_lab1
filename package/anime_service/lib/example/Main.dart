@@ -5,11 +5,6 @@ void TestAnime(List<dynamic> animeList) {
     final title = anime['title']['romaji'];
     final type = anime['type'];
     final genres = anime['genres'];
-    print(anime);
-    // print('Title: $title');
-    //print('Type: $type');
-    // print('Genres: $genres');
-    //  print('---');
   }
 }
 
@@ -18,11 +13,6 @@ void TestCharacter(List<dynamic> characterList) {
     final characterId = character['node']['id'];
     final characterName = character['node']['name']['full'];
     final characterImage = character['node']['image']['large'];
-
-    print('Character ID: $characterId');
-    print('Character Name: $characterName');
-    print('Character Image: $characterImage');
-    print('---');
   }
 }
 
