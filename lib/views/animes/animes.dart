@@ -11,39 +11,91 @@ class Animes extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final arguments =
-        ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
+    return BlocBuilder<AppContextBloc, AppContextState>(
+      builder: (context, state) {
+        final arguments =
+            ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>;
 
-    final genreSelected = arguments['genre'];
+        final genreSelected = arguments['genre'];
+        final animes = state.animes;
+        print('eeeeeeeeeeeeeeoooooooooooooooo: $animes');
 
-    final animes = context.select<AppContextBloc, List<AnimeModel>>(
-        (values) => values.state.animes);
+        List<AnimeModel> animesFiltered = animes
+            .where((anime) => anime.genres.contains(genreSelected))
+            .toList();
 
-    List<AnimeModel> animesFiltered =
-        animes.where((anime) => anime.genres.contains(genreSelected)).toList();
+        animesFiltered.forEach((anime) {
+          print('ID: ${anime.id}');
+          print('Title: ${anime.title.english}');
+          print('Type: ${anime.type}');
+          print('Genres: ${anime.genres}');
+          print('------------------------');
+        });
 
-    return Scaffold(
-        body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Center(
-          child: Container(
-        width: 200,
-        height: 50,
-        decoration: BoxDecoration(
-          color: Colors.red,
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ))
-      // child: TextButton(
-      //     onPressed: () {
-      //       // Button pressed callback
-      //       print('Button Pressed!');
-      //       Navigator.pushNamed(context, '/');
-      //     },
-      //     child: Text(animes[0].title.romaji,
-      //         style: const TextStyle(
-      //           color: Colors.white,
-      //           fontSize: 18,
-      //         ))))),
-    ]));
+        return Scaffold(
+          body: SingleChildScrollView(
+            child: Center(
+              child: GridView.builder(
+                padding: const EdgeInsets.all(16),
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4,
+                  crossAxisSpacing: 40,
+                  mainAxisSpacing: 40,
+                ),
+                itemCount: animesFiltered.length,
+                itemBuilder: (context, index) {
+                  final anime = animesFiltered[index];
+
+                  return Card(
+                    key: ValueKey(anime),
+                    color: Color.fromRGBO(163, 65, 61, 1),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          anime.title.english,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 20,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'ID: ${anime.id}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 14,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'Type: ${anime.type}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 12,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                        Text(
+                          'Genres: ${anime.genres.join(", ")}',
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

@@ -30,9 +30,11 @@ class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
     Emitter<AppContextState> emit,
   ) async {
     try {
-      print('intentando fetchedAnimes');
+      print('intentando fetchedAnimessssssssssss');
       final fetchedAnimes = await animeAPI.getAnimes();
-      print('fetchedAnimes');
+      print('intentando fetchedAnimessssssssssss 22222222222222');
+
+      print('fetchedAnimesssssssssssssssssssssssssssssssss:');
       print(fetchedAnimes);
       emit(state.copyWith(
         animes: fetchedAnimes,

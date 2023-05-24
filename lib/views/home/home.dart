@@ -16,6 +16,13 @@ class Home extends StatelessWidget {
     print("genres");
     print(genres);
     print("animes");
+    animes.forEach((anime) {
+      print('ID: ${anime.id}');
+      print('Title: ${anime.title.english}');
+      print('Type: ${anime.type}');
+      print('Genres: ${anime.genres}');
+      print('------------------------');
+    });
     print(animes);
     return Scaffold(
         body: SingleChildScrollView(
