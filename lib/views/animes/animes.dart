@@ -21,8 +21,6 @@ class Animes extends StatelessWidget {
 
     List<AnimeModel> animesFiltered =
         animes.where((anime) => anime.genres.contains(genreSelected)).toList();
-    print(animes);
-    print(animesFiltered);
 
     return Scaffold(
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [

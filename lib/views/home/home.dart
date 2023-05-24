@@ -1,3 +1,4 @@
+import 'package:anime_repository/anime_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:moviles_lab1/app_context/app_context.dart';
@@ -10,8 +11,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     final genres = context
         .select<AppContextBloc, List<String>>((values) => values.state.genres);
-    print(genres.length);
-
+    final animes = context.select<AppContextBloc, List<AnimeModel>>(
+        (values) => values.state.animes);
+    print("genres");
+    print(genres);
+    print("animes");
+    print(animes);
     return Scaffold(
         body: SingleChildScrollView(
             child: Column(

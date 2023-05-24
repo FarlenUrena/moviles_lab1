@@ -11,6 +11,8 @@ dependencies:
   flutter:
     sdk: flutter
   graphql_flutter: ^5.1.2
+  anime_repository:
+    path: ../anime_repository
 
 dev_dependencies:
   flutter_test:

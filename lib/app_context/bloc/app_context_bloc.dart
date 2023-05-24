@@ -4,8 +4,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
   AppContextBloc() : super(const AppContextState()) {
-    on<GetGenres>(_handleGetGenres);
     on<GetAnimes>(_handleGetAnimes);
+    on<GetGenres>(_handleGetGenres);
   }
 
   Future<void> _handleGetGenres(
@@ -13,8 +13,10 @@ class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
     Emitter<AppContextState> emit,
   ) async {
     try {
+      print('intentando fetchedGenres');
       final fetchedGenres = await animeAPI.getGenres();
-
+      print('fetchedGenres');
+      print(fetchedGenres);
       emit(state.copyWith(
         genres: fetchedGenres,
       ));
@@ -28,8 +30,10 @@ class AppContextBloc extends Bloc<AppContextEvent, AppContextState> {
     Emitter<AppContextState> emit,
   ) async {
     try {
+      print('intentando fetchedAnimes');
       final fetchedAnimes = await animeAPI.getAnimes();
-
+      print('fetchedAnimes');
+      print(fetchedAnimes);
       emit(state.copyWith(
         animes: fetchedAnimes,
       ));

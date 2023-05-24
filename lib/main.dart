@@ -19,32 +19,30 @@ class MyApp extends StatelessWidget {
       create: (context) => AnimeRepository(),
       child: BlocProvider(
         create: (context) => AppContextBloc(),
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-            useMaterial3: true,
-          ),
-          home: BlocBuilder<AppContextBloc, AppContextState>(
+        child: BlocBuilder<AppContextBloc, AppContextState>(
             builder: (context, state) {
-              if (state.genres.isEmpty) {
-                context.read<AppContextBloc>().add(GetGenres());
-                context.read<AppContextBloc>().add(GetAnimes());
-                return const Text('Loading...',
+          if (state.genres.isEmpty) {
+            context.read<AppContextBloc>().add(GetAnimes());
+            context.read<AppContextBloc>().add(GetGenres());
+          }
+          return MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            home: state.genres.isNotEmpty
+                ? const Home()
+                : const Text('Loading...',
                     style: TextStyle(
                       color: Colors.black,
                       fontSize: 60,
-                    ));
-              }
-              // } else {
-              return const Home();
-              // }
+                    )),
+            routes: {
+              '/animes': (context) => const Animes(),
             },
-          ),
-          routes: {
-            '/animes': (context) => const Animes(),
-          },
-        ),
+          );
+        }),
       ),
     );
   }

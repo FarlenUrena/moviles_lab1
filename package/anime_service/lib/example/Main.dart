@@ -28,7 +28,6 @@ void TestCharacter(List<dynamic> characterList) {
 
 void main() async {
   final animeService = AnimeService();
-  final animeList = await animeService.getAllAnimeGenres();
+  final animeList = await animeService.getAnimeList();
   //TestCharacter(animeList);
-  print(animeList);
 }

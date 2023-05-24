@@ -13,9 +13,13 @@ class AnimeRepository {
   Future<List<AnimeModel>> getAnimes() async {
     final List<AnimeModel> animes = const [];
     try {
+      print('api fetchin...');
       final animesFetched =
           await _animeService.getAnimeList() as List<AnimeModel>;
 
+      print('api fetch');
+
+      print(animesFetched);
       for (final anime in animesFetched) {
         animes.add(
           AnimeModel(
@@ -30,6 +34,7 @@ class AnimeRepository {
           ),
         );
       }
+      print("Repo" + animes[0].title.english);
       return animes;
     } catch (_) {
       throw Exception();
@@ -45,10 +50,9 @@ class AnimeRepository {
       for (final genre in genresFetched) {
         genres.add(genre);
       }
-      print(genres);
+
       return genres;
     } catch (_) {
-      print('error');
       throw Exception();
     }
   }

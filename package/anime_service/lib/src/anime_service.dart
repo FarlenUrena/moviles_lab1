@@ -1,3 +1,4 @@
+import 'package:anime_repository/src/models/anime_model.dart';
 import 'package:graphql_flutter/graphql_flutter.dart';
 
 class AnimeService {
@@ -13,7 +14,8 @@ class AnimeService {
     );
   }
 
-  Future<List<dynamic>> getAnimeList() async {
+  ///
+  Future<List<AnimeModel>> getAnimeList() async {
     final query = gql('''
       query FetchAnimeList(\$page: Int, \$perPage: Int) {
         Page(page: \$page, perPage: \$perPage) {
@@ -33,7 +35,7 @@ class AnimeService {
 
     final options = QueryOptions(
       document: query,
-      variables: {'page': 1, 'perPage': 10},
+      // variables: {'page': 1, 'perPage': 10},
     );
 
     final result = await _client.query(options);
@@ -42,9 +44,12 @@ class AnimeService {
       throw Exception('Failed to fetch anime list: ${result.exception}');
     }
 
-    final animeList = result.data?['Page']['media'] as List<dynamic>?;
+    // final animeList = result.data?['Page']['media'] as List<AnimeModel>?;
 
-    return animeList ?? [];
+    final animeList = result.data?['Page']['media'];
+    print('animeList');
+    print(animeList);
+    return animeList as List<AnimeModel>? ?? [];
   }
 
   Future<List<String>> getAllAnimeGenres() async {
